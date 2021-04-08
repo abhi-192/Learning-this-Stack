@@ -3,6 +3,11 @@ const express = require('express');
 const path = require('path');
 const port = 8000;
 
+//firing up our mongoDB sever
+//this line must be before starting express server
+const db = require('./config/mongoose');
+const Obj = require('./models/obj');
+
 //naming it app is a convention
 const app = express();
 
@@ -35,6 +40,35 @@ app.use(function(req,res,next){
     next();
 });
 
+//Creating a new entry in database
+app.get('./index/add-object',function(req,res){
+    Obj.create({
+        name:req.body.name,
+        objId: req.body.objId
+    },function(err,newObj){
+        if(err){
+            console.log("Error while creating a new entry.");
+            return;
+        }
+        console.log("New Entry created.",newObj);
+        return res.redirect('back');
+    });
+});
+
+//Deleting an entry from database
+app.get('./index/delete-object/:name',function(req,res){
+    //first search object having same details as mentioned in query
+    //use req.query.name for it.
+    let idToBeDeleted = req.query.name;
+    Obj.findByIdAndDelete(idToBeDeleted,function(err){
+        if(err){
+            console.log('Error while deleting an id from database.');
+            return;
+        }
+        console.log('ID deleted');
+        return res.redirect('back');
+    })
+});
 
 app.listen(port,function(err){
     if(err){
