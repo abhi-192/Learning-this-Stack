@@ -5,7 +5,6 @@ const port = 8000;
 
 //firing up our mongoDB sever
 //this line must be before starting express server
-const db = require('./config/mongoose');
 const Obj = require('./models/obj');
 
 //naming it app is a convention
