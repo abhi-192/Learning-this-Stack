@@ -1,0 +1,21 @@
+{
+  "name": "template-engine",
+  "version": "1.0.0",
+  "description": "Learning how to use template engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Template",
+    "engine",
+    "Ejs"
+  ],
+  "author": "abhi-192",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
